@@ -12,6 +12,7 @@
 
 ## Helpful Articles:
 * [Android MVVM Design Pattern](https://www.journaldev.com/20292/android-mvvm-design-pattern)
+* [SQLite - Java](https://www.sqlitetutorial.net/sqlite-java/create-database/)
 
 ### Requirements:
 1. Users must have a secure login
