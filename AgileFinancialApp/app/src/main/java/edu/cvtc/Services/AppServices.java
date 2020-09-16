@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 
-import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
 
@@ -13,7 +12,7 @@ import edu.cvtc.Models.UserModel;
 
 import java.util.List;
 
-public class AppServices extends SQliteOpenHelper implements IAppServices{
+public class AppServices extends SQliteOpenHelper {
 
     public enum Environment{
         Live,
@@ -27,11 +26,8 @@ public class AppServices extends SQliteOpenHelper implements IAppServices{
     public final String DEVELOP_DATABASE_NAME = "Dev_Financial_db.db";
     public final String QA_DATABASE_NAME = "QA_Financial_db.db";
 
-    private Environment CurrentEnvironment;
-
-    public AppServices(Environment environment){
-        this.CurrentEnvironment= environment;
-    }
+    //Change when Testing/Developing/Live
+    private Environment CurrentEnvironment = Environment.Develop;
 
     public UserModel GetUserByCredentials(String username, String password){
         //call the database for username/password and if there is a record matching return true.
@@ -45,6 +41,24 @@ public class AppServices extends SQliteOpenHelper implements IAppServices{
     }
 
     private void CreateDatabase(){
+        //Create each of the databases.
+    }
 
+    public String GetCurrentDatabase(Environment env){
+
+        String dbName = "";
+
+        switch(env){
+            case Live:
+                dbName = LIVE_DATABASE_NAME;
+                break;
+            case Develop:
+                dbName = DEVELOP_DATABASE_NAME;
+                break;
+            case QA:
+                dbName = QA_DATABASE_NAME;
+                break;
+        }
+        return dbName;
     }
 }
