@@ -1,14 +1,17 @@
-﻿using FinancialAppp.Services.Abstractions;
-using System;
-using System.Threading.Tasks;
+﻿using System;
+using System.IO;
+using FinancialAppp.Database;
 
 namespace FinancialAppp.Services
 {
-    public class AppServices : IAppServices
+    public class AppServices
     {
-        public Task CreateDatabases()
-        {
-            throw new NotImplementedException();
-        }
+        private static FinancialDatabase _database;
+
+        public static FinancialDatabase Database =>
+            _database ?? (_database = new FinancialDatabase(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "financial_db.db3")));
+
     }
 }
