@@ -1,4 +1,8 @@
-﻿using GalaSoft.MvvmLight;
+﻿using FinancialAndroid.Factory;
+using FinancialAndroid.Services;
+using FinancialAndroid.Views;
+using GalaSoft.MvvmLight;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -8,10 +12,16 @@ namespace FinancialAndroid.ViewModels
     public class LoginViewModel : ViewModelBase
     {
         public INavigation Navigation { get; set; }
+        private readonly AppService _appService;
+        private readonly AppFactory _appFactory;
 
         public LoginViewModel(INavigation nav)
         {
             Navigation = nav;
+
+            _appService = DependencyService.Get<AppService>();
+            _appFactory = DependencyService.Get<AppFactory>();
+
             LoginCommand = new Command(async () => await LoginCommandMethod());
             CreateUserCommand = new Command(async () => await CreateUserCommandMethod());
         }
@@ -34,6 +44,7 @@ namespace FinancialAndroid.ViewModels
 
         public async Task LoginCommandMethod()
         {
+            await Locator.LoginView.DisplayAlert("Invalid Credentials", "Username or password are incorrect\nTry again.", "OK");
             await Navigation.PushAsync(Locator.ExpensesView);
         }
 

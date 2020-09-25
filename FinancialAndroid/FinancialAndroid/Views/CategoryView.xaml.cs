@@ -10,7 +10,8 @@ namespace FinancialAndroid.Views
         public CategoryView()
         {
             InitializeComponent();
-            BindingContext = new CategoryViewModel(Navigation);
+            //BindingContext = new CategoryViewModel();
+            
         }
     }
 }

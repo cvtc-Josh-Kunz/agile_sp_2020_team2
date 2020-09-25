@@ -1,5 +1,8 @@
 ﻿using FinancialAndroid.Views;
 using Xamarin.Forms;
+using SQLite;
+using FinancialAndroid.Services;
+using FinancialAndroid.Factory;
 
 namespace FinancialAndroid
 {
@@ -8,6 +11,9 @@ namespace FinancialAndroid
         public App()
         {
             InitializeComponent();
+
+            DependencyService.Register<AppService>();
+            DependencyService.Register<AppFactory>();
 
             Locator.LoginView = new LoginView();
             Locator.ExpensesView = new ExpensesView();

@@ -1,4 +1,5 @@
-﻿using FinancialAndroid.Views;
+﻿using FinancialAndroid.Services;
+using FinancialAndroid.Views;
 
 namespace FinancialAndroid
 {
@@ -9,7 +10,6 @@ namespace FinancialAndroid
         public static CreateUserView CreateUserView { get; set; }
         public static ExpensesView ExpensesView { get; set; }
         public static CategoryView CategoryView { get; set; }
-
         #endregion
     }
 }
