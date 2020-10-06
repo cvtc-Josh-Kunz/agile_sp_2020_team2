@@ -1,8 +1,7 @@
-﻿using FinancialAndroid.Views;
-using Xamarin.Forms;
-using SQLite;
+﻿using FinancialAndroid.Factory;
 using FinancialAndroid.Services;
-using FinancialAndroid.Factory;
+using FinancialAndroid.Views;
+using Xamarin.Forms;
 
 namespace FinancialAndroid
 {
@@ -21,6 +20,8 @@ namespace FinancialAndroid
             Locator.CreateUserView = new CreateUserView();
 
             MainPage = new NavigationPage(Locator.LoginView);
+
+            //Test();
         }
 
         protected override void OnStart()
@@ -33,6 +34,15 @@ namespace FinancialAndroid
 
         protected override void OnResume()
         {
+        }
+
+        public async void Test()
+        {
+            var list = await DependencyService.Get<AppService>().GetCategories();
+
+            var v = (list == null).ToString();
+
+            await Locator.LoginView.DisplayAlert(v, "test", "ok");
         }
     }
 }

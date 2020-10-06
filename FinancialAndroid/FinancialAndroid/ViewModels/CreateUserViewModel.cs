@@ -50,12 +50,16 @@ namespace FinancialAndroid.ViewModels
         {
             try
             {
-                //_appService.InsertUser();
-                throw new ArgumentNullException("");
+                var pass = await _appService.TryCreateUser(CreateUsername, CreatePassword);
+
+                if (pass)
+                {
+                    await Navigation.PopAsync();
+                }
             }
-            catch
+            catch (Exception e)
             {
-                await Locator.CreateUserView.DisplayAlert("Failed", "Try again", "OK");
+                await Locator.CreateUserView.DisplayAlert("Failed", e.ToString(), "OK");
             }
 
         }

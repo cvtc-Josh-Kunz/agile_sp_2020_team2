@@ -3,9 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              NavigationPage.HasNavigationBar="false"
              x:Class="FinancialAndroid.Views.ExpensesView">
-    
-    
-    <Frame IsClippedToBounds="True"
+
+    <StackLayout>
+        <Picker ItemsSource="{Binding AllCategories}"/>
+
+        <ListView
+        x:Name="ExpenseListView"
+        Margin="0"
+        HasUnevenRows="True"
+        SeparatorVisibility="None"
+        ItemsSource="{Binding DisplayList}"
+        SelectionMode="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell x:Name="ExpenseListViewCell">
+                        <Frame
+                        HeightRequest="80"
+                        Margin="5"
+                        Padding="1"
+                        BackgroundColor="White"
+                        CornerRadius="5">
+                            <Grid VerticalOptions="CenterAndExpand" ColumnSpacing="8">
+
+
+
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+
+    <!--<Frame IsClippedToBounds="True"
            HasShadow="True"
            BackgroundColor="White"
            >
@@ -24,9 +55,9 @@
         </Frame.Padding>
         <StackLayout Orientation="Horizontal">
 
-            
-            
+
+
         </StackLayout>
-    </Frame>
-    
+    </Frame>-->
+
 </ContentPage>
