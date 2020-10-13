@@ -1,11 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             NavigationPage.HasNavigationBar="false"
-             x:Class="FinancialAndroid.Views.ExpensesView">
-
+             x:Class="FinancialAndroid.Views.ExpensesView"
+             NavigationPage.HasBackButton="False"
+             x:Name="this">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary"
+                     Priority="0" />
+        <ToolbarItem Text="Add Expense"
+                     Order="Secondary"
+                     Command="{Binding AddExpenseCommand}"
+                     Priority="0" />
+        <ToolbarItem Text="Add Category"
+                     Order="Secondary"
+                     Command="{Binding AddCategoryCommand}"
+                     Priority="1" />
+</ContentPage.ToolbarItems>
     <StackLayout>
-        <Picker ItemsSource="{Binding AllCategories}"/>
+
+        <!--Drop down for categories-->
+        <Label Text="Selected Category"/>
+        <Picker ItemsSource="{Binding AllCategories}"
+                SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"/>
+
+        <!---->
+
 
         <ListView
         x:Name="ExpenseListView"
@@ -24,8 +43,18 @@
                         BackgroundColor="White"
                         CornerRadius="5">
                             <Grid VerticalOptions="CenterAndExpand" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
 
-
+                                <Label Text="{Binding CategoryId}"
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="CenterAndExpand"/>
 
                             </Grid>
                         </Frame>
@@ -34,30 +63,5 @@
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-
-
-    <!--<Frame IsClippedToBounds="True"
-           HasShadow="True"
-           BackgroundColor="White"
-           >
-        <Frame.OutlineColor>
-            <OnPlatform x:TypeArguments="Color"
-                  Android="Gray"
-                  iOS="Gray"/>
-        </Frame.OutlineColor>
-        <Frame.Margin>
-            <OnPlatform x:TypeArguments="Thickness"
-                  Android="7" iOS="7"/>
-        </Frame.Margin>
-        <Frame.Padding>
-            <OnPlatform x:TypeArguments="Thickness"
-                  Android="5" iOS="5"/>
-        </Frame.Padding>
-        <StackLayout Orientation="Horizontal">
-
-
-
-        </StackLayout>
-    </Frame>-->
 
 </ContentPage>

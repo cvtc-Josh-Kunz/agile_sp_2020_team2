@@ -1,6 +1,7 @@
 ﻿using FinancialAndroid.Factory;
 using FinancialAndroid.Services;
 using FinancialAndroid.Views;
+using System.Runtime.InteropServices;
 using Xamarin.Forms;
 
 namespace FinancialAndroid
@@ -18,6 +19,8 @@ namespace FinancialAndroid
             Locator.ExpensesView = new ExpensesView();
             Locator.CategoryView = new CategoryView();
             Locator.CreateUserView = new CreateUserView();
+            Locator.CreateCategoryView = new CreateCategoryView();
+            Locator.CreateExpenseView = new CreateExpenseView();
 
             MainPage = new NavigationPage(Locator.LoginView);
 

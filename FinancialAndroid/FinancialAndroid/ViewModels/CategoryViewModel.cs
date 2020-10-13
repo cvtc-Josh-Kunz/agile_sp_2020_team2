@@ -17,5 +17,10 @@ namespace FinancialAndroid.ViewModels
             set => Set(ref _categoryName, value);
         }
         private string _categoryName;
+
+        public override string ToString()
+        {
+            return CategoryName;
+        }
     }
 }

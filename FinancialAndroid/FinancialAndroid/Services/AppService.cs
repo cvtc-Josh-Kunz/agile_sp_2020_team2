@@ -33,12 +33,9 @@ namespace FinancialAndroid.Services
 
         public async Task<List<Category>> GetCategories()
         {
-            //var map = GetMap(typeof(Category));
+            var catTable = _database.Table<Category>();
 
-            string sql = "SELECT * FROM Category";
-
-            //this might not work
-            return await _database.FindWithQueryAsync<List<Category>>(sql);
+            return await catTable.ToListAsync();
         }
 
         public TableMapping GetMap(Type t)
@@ -47,7 +44,6 @@ namespace FinancialAndroid.Services
         }
 
         #region Create User
-
         public async Task<bool> TryCreateUser(string username, string password)
         {
             try
@@ -56,7 +52,6 @@ namespace FinancialAndroid.Services
 
                 if (!exists)
                 {
-
                     var user = new User()
                     {
                         Username = username,
@@ -74,11 +69,46 @@ namespace FinancialAndroid.Services
             }
             catch(Exception e)
             {
-                await Locator.CreateUserView.DisplayAlert("", e.ToString(), "");
                 return false;
             }
         }
+        #endregion
 
+        #region Create Category
+        public async Task<bool> TryCreateCategory(string categoryName)
+        {
+            try
+            {
+                var newCategory = new Category()
+                {
+                    CategoryName = categoryName
+                };
+
+                await _database.InsertAsync(newCategory);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                await Locator.CreateCategoryView.DisplayAlert("error", e.ToString(), "ok");
+                return false;
+            }
+        }
+        #endregion
+
+        #region Create Expense
+        public async Task<bool> CreateExpense(Expense e)
+        {
+            try
+            {
+                await _database.InsertAsync(e);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         #endregion
     }
 }
